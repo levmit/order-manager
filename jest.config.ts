@@ -1,5 +1,6 @@
 export default {
-    preset: 'ts-jest',
-    testEnvironment: 'node',
-    testMatch: ['**/tests/**/*.test.ts'],
+  preset: "ts-jest",
+  testEnvironment: "node",
+  testMatch: ["**/tests/**/*.test.ts"],
+  testTimeout: 10000, // 10 seconds timeout
 };
