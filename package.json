@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "init-db": "ts-node scripts/initDB.ts",
+    "drop-db": "ts-node scripts/dropDB.ts",
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "test": "jest"
