@@ -1,8 +1,15 @@
-import Koa from 'koa';
-import Router from 'koa-router';
-import bodyParser from 'koa-bodyparser';
-import { logger } from './middleware/logger';
-import { getOrderState, transitionOrderState } from './controllers/orderController';
+import Koa from "koa";
+import Router from "koa-router";
+import bodyParser from "koa-bodyparser";
+import { logger } from "./middleware/logger";
+import {
+  createOrder,
+  getOrderById,
+  updateOrderById,
+  deleteOrderById,
+  getAllOrders,
+  transitionOrderState,
+} from "./controllers/orderController";
 
 const app = new Koa();
 const router = new Router();
@@ -10,20 +17,17 @@ const router = new Router();
 // Use body parser middleware
 app.use(bodyParser());
 
-router.get('/order/state', getOrderState);
-router.post('/order/transition', transitionOrderState);
+// Routes
+router.post("/orders", createOrder); // Add a new Order
+router.get("/orders", getAllOrders); // Get list of all Orders
+router.get("/orders/:id", getOrderById); // Get Order by ID
+router.put("/orders/:id", updateOrderById); // Update Order by ID
+router.delete("/orders/:id", deleteOrderById); // Delete Order by ID
+router.post("/orders/:id/transition", transitionOrderState); // Transition Order State
 
+// Middleware
 app.use(logger);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-// Export the Koa app
 export { app };
-
-// Start the server only if this file is executed directly
-if (require.main === module) {
-    const PORT = process.env.PORT || 3000;
-    const server = app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-}
