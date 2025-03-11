@@ -1,10 +1,10 @@
-import { orderService } from '../stateMachine/orderMachine';
+import { orderService } from "../stateMachine/orderMachine";
 
 export const getOrderState = () => {
-    return orderService.state.value;
+  return orderService.getSnapshot().value;
 };
 
 export const transitionOrderState = (event: string) => {
-    orderService.send(event);
-    return orderService.state.value;
+  orderService.send(event);
+  return orderService.getSnapshot().value;
 };
