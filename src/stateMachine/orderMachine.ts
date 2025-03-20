@@ -19,4 +19,8 @@ export const orderMachine = createMachine({
   },
 });
 
-export const orderService = interpret(orderMachine).start();
+export const orderService = interpret(orderMachine)
+  .onTransition((state) => {
+    console.log(">>>>>>>>>> State transition:", state.value);
+  })
+  .start();
