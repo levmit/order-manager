@@ -1,4 +1,7 @@
 export interface Order {
-    id: string;
-    state: string;
+  id: string;
+  customerName: string;
+  product: string;
+  quantity: string;
+  state: string;
 }
